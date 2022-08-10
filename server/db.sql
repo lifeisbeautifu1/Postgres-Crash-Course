@@ -28,3 +28,14 @@ CREATE TABLE restaurants (
 
 
 INSERT INTO restaurants (id, name, location, price_range) VALUES (123, 'McDonalds', 'NY', 10);
+
+
+CREATE TABLE reviews (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    rid BIGINT NOT NULL REFERENCES restaurants(id),
+    name VARCHAR(50) NOT NULL,
+    rating INT NOT NULL check(rating >= 1 and rating <= 5),
+    review text NOT NULL
+);
+
+SELECT * FROM reviews INNER JOIN restaurants ON reviews.rid = restaurants.id;
